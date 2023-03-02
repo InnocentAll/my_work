@@ -1,0 +1,88 @@
+{%extends 'students/layout.html' %}
+
+{%block content%}
+<div class="row">
+	<div class="col-sm-2"></div>
+	
+  
+<div class="shadow p-4 mb-5 bg-body rounded col-md-8">
+	<center>
+
+		<h3>Details d'un Etudiant...</h3>
+        <div class="col-12 d-flex float-left mb-2"><img src="{{student.photo.url}}" width="250px"  ></div>
+	</br>
+	<table class="table table-bordered table-striped table-hover">
+		<tbody>            
+		  <tr class="success"> 
+			
+			<td><strong>ID: </strong>{{student.id}}</td>
+		  </tr>
+
+			<tr class="success"> 
+			<td><strong>Nom et Prenom:</strong> {{student.nom}}</td>
+		  </tr>
+
+			<tr class="success"> 
+			<td><strong>Genre:</strong> {{student.genre}}</td>
+		  </tr>
+
+			<tr class="success"> 
+			<td><strong>Nationnalité:</strong> {{student.nationnalite}}</td>
+		  </tr>
+
+		  
+		  <tr class="success"> 
+			<td><strong>Filière:</strong> {{student.filiere}}</td>
+		   </tr>
+
+			<tr class="success"> 
+			 <td><strong>Niveau:</strong> {{student.niveau}}</td>
+			</tr>
+
+            <tr class="success"> 
+                <td><strong>Status:</strong> {{student.status}}</td>
+               </tr>
+
+            <tr class="success"> 
+                <td><strong>Telephone:</strong> {{student.adresse.telephone}}</td>
+               </tr>
+
+            <tr class="success"> 
+                <td><strong>Email:</strong> {{student.adresse.email}}</td>
+               </tr>
+
+            <tr class="success"> 
+                <td><strong>Quartier:</strong> {{student.adresse.quartier}}</td>
+               </tr>
+
+            <tr class="success"> 
+                <td><strong>Ville:</strong> {{student.adresse.ville}}</td>
+               </tr>
+
+		</tbody>
+	</table>
+
+	  <div class="row">
+		<div class="col-sm-4">
+	   
+		  <strong>Les Formation en cours:</strong></br>
+		{% for course in student.Matiere.all %}
+        <ul> 
+            <li>Nom: {{course.nom}}</li>
+            <li>Credit: {{course.credit}}</li>
+            <li>Note: {{course.note}}</li>
+            <li>Appreciation: {{course.appreciation}}</li>
+        </ul>
+        {% endfor %}
+		</div>
+        <div class="col-12 d-flex justify-content-end mb-2">
+            <a class="btn btn-warning sm mx-2" href="{% url 'update_student' student.id %}"> Modifier </a>
+            <a class="btn btn-danger sm mx-2" href="{% url 'delete_student' student.id %}" onclick="return confirm('Etes-vous sûr de vouloir supprimer cet étudiant ?')"> Supprimer </a> 
+            <a class="btn btn-info sm mx-2" href="{% url 'students_list' %}"> Retour </a>
+        </div>
+	</div>
+
+	</center>
+</div>
+</div> 
+{%endblock%}

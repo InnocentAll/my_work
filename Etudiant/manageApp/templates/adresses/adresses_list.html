@@ -1,0 +1,35 @@
+{% extends 'students/layout.html' %}
+
+{% block content %}
+	<h1>Liste des adresses</h1>
+	<style>h1{color: peru;}</style>
+	<div class="col-12 d-flex justify-content-end mb-2"> 
+		<a class="btn btn-primary sm " href="{% url 'add_adresse' %}"> Nouvelle adresse </a>
+	</div>
+		<table class="table table-bordered table-striped table-hover">
+		  <thead class="table-dark">
+			<tr>
+              <th>Telephone</th>
+			  <th>Email</th>
+			  <th>Quartier</th>
+			  <th>Ville</th>
+			  <th>Opérations</th>
+			</tr>
+		  </thead>
+		  <tbody>            
+			{% for adresse  in  adresses %} 
+			<tr class="success">
+			  <td>{{adresse.telephone}}</td>
+			  <td>{{adresse.email}}</td>
+			  <td>{{adresse.quartier}}</td>
+			  <td>{{adresse.ville}}</td>
+			 <td>
+				 <a class="btn btn-outline-warning sm" href="{% url 'update_adresse' adresse.id %}">Modifier</a>
+				 <a class="btn btn-outline-danger sm" href="{% url 'delete_adresse' adresse.id %}" onclick="return confirm('Etes-vous sûr de vouloir supprimer cette adresse ?')">Supprimer</a>
+			 </td>
+			</tr>
+			{% endfor %}
+		  </tbody>
+		</table>
+
+{% endblock %}

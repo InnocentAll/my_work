@@ -1,0 +1,42 @@
+{% extends 'students/layout.html' %}
+
+{% block content %}
+	<h1>Liste des étudiants</h1>
+	<style>h1{color: peru;}</style>
+	<div class="col-12 d-flex justify-content-end mb-2"> 
+		<a class="btn btn-primary sm " href="{% url 'add_student' %}"> Nouveau Etudiant </a>
+	</div>
+		<table class="table table-bordered table-striped table-hover">
+		  <thead class="table-dark">
+			<tr>
+              <th>Matricule</th>
+			  <th>Nom et prenom</th>
+			  <th>Genre</th>
+              <th>Filière</th>
+			  <th>Email</th>
+			  <th>Telephone</th>
+			  <th>Photo</th>
+			  <th>Details</th>
+			</tr>
+		  </thead>
+		  <tbody>            
+			{% for student  in  students %} 
+			<tr class="success">
+			  <td>{{student.matricule}}</td>
+			  <td>{{student.nom}}</td>
+			  <td>{{student.genre}}</td>
+			  <td>{{student.filiere}}</td>
+			  <td>{{student.adresse.email}}</td>
+              <td>{{student.adresse.telephone}}</td>
+			 {% if student.photo %}
+              <td> <img src="{{student.photo.url}}" width="25px" class="rounded-circle" > </td>
+			 {% endif %}
+			 <td><a class="btn btn-outline-info sm" href="{% url 'show_student' student.id %}">
+				Details
+			</a></td>
+			</tr>
+			{% endfor %}
+		  </tbody>
+		</table>
+
+{% endblock %}
